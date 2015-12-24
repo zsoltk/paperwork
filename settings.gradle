@@ -1,1 +1,1 @@
-include ':paperwork-runtime', ':paperwork-plugin'
+include ':paperwork-runtime', ':paperwork-plugin', ':paperwork-example'
