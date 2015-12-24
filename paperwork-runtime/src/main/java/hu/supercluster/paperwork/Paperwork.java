@@ -57,7 +57,7 @@ public class Paperwork {
                 json = getJsonContents();
 
             } catch (JSONException e) {
-                throw new PaperworkException("There file '%s' contains invalid JSON data", filename, e);
+                throw new PaperworkException("The file '%s' contains invalid JSON data", filename, e);
             }
         }
     }
@@ -98,7 +98,7 @@ public class Paperwork {
             !jsonObject.has(BUILD_TIME) ||
             !jsonObject.has(EXTRA)) {
 
-            throw new PaperworkException("There file '%s' is missing paperwork data", filename);
+            throw new PaperworkException("The file '%s' is missing paperwork data", filename);
         }
     }
 }
