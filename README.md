@@ -56,7 +56,7 @@ apply plugin: 'hu.supercluster.paperwork'
 paperwork {
     // You can generate the file somewhere else. Note however, that in order for it to be available
     // in Paperwork runtime, it has to be in the assets folder, and if the filename is not
-    // paperwork.json, you have to inject it's name either in the constructor, or through
+    // paperwork.json, you have to inject its name either in the constructor, or through
     // Paperwork#setFilename()
     outputFilename = 'src/main/assets/paperwork.json'
      
