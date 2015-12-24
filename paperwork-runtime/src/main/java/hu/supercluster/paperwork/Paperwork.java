@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class Paperwork {
+    public static final String DEFAULT_FILENAME = "paperwork.json";
     public static final String GIT_SHA = "gitSha";
     public static final String BUILD_TIME = "buildTime";
     public static final String EXTRA = "extra";
@@ -21,7 +22,7 @@ public class Paperwork {
     private JSONObject json;
 
     public Paperwork(Context context) {
-        this(context, "paperwork.json");
+        this(context, DEFAULT_FILENAME);
     }
 
     public Paperwork(Context context, String filename) {
