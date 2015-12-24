@@ -79,7 +79,7 @@ Lastly, add ```paperwork.json``` to your ```.gitignore```
 
 ### Contributing
 
-Contributions are welcome! Got a question, found a bug, have a new feature idea? Submit an issue with the appropriate label.
+Contributions are welcome! Got a question, found a bug, have a new feature idea? Submit an issue.
 
 
 ### License
