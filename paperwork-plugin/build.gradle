@@ -1,5 +1,31 @@
-apply plugin: 'java'
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.5.0'
+    }
+}
+
+apply plugin: 'groovy'
+
+// gradle.properties holds credentials and is not checked in
+def gradleProperties = new File('gradle.properties')
+if (gradleProperties.exists()) {
+    apply from: 'maven-push.gradle'
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile gradleApi()
+    compile localGroovy()
+
 }
+
+targetCompatibility = JavaVersion.VERSION_1_7
+sourceCompatibility = JavaVersion.VERSION_1_7
