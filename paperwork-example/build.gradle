@@ -1,22 +1,20 @@
 buildscript {
     repositories {
         mavenCentral()
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:1.5.0'
-        classpath 'hu.supercluster:paperwork-plugin:1.0.0-SNAPSHOT'
+        classpath 'hu.supercluster:paperwork-plugin:1.0.0'
     }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'hu.supercluster.paperwork'
 
-//paperwork {
-//    extra = '{"mydata1": "foo bar", "mydata2": "lorem ipsum"}'
-//    outputFilename 'src/main/assets/paperwork.json'
-//}
+paperwork {
+    extra '{"mydata1": "foo bar", "mydata2": "lorem ipsum"}'
+}
 
 android {
     compileSdkVersion 23
@@ -38,15 +36,10 @@ android {
     }
 }
 
-repositories {
-    mavenCentral()
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-}
-
 dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'hu.supercluster:paperwork:1.0.0-SNAPSHOT'
+    compile 'hu.supercluster:paperwork:1.0.0'
 
     testCompile 'junit:junit:4.12'
 }

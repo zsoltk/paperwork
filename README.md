@@ -42,11 +42,10 @@ Add these dependencies to your ```build.gradle```:
 buildscript {
     repositories {
         mavenCentral()
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     }
-
+    
     dependencies {
-        classpath 'hu.supercluster:paperwork-plugin:1.0.0-SNAPSHOT'
+        classpath 'hu.supercluster:paperwork-plugin:1.0.0'
     }
 }
 
@@ -64,13 +63,9 @@ paperwork {
     // The only requirement is that it should be a valid JSON object, or else horrible things will happen.
     extra = '{"mydata1": "foo bar", "mydata2": "lorem ipsum"}'
 }
-
-repositories {
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-}
     
 dependencies {
-    compile 'hu.supercluster:paperwork:1.0.0-SNAPSHOT'
+    compile 'hu.supercluster:paperwork:1.0.0'
 }
 ```
 
