@@ -36,7 +36,7 @@ The ```getExtra()``` is a handy method to access your own generated infos. See t
 Incremental builds are not broken, yay!
 
 ### Download and setup
-The plugin and runtime libs are available on Maven Central. Add these dependencies to your ```build.gradle```:
+Add these dependencies to your ```build.gradle```:
 
 ```groovy
 buildscript {
@@ -60,9 +60,9 @@ paperwork {
     // Paperwork#setFilename()
     outputFilename = 'src/main/assets/paperwork.json'
      
-     // You can inject your own extras like this. Maybe use the output of a script here, I don't know.
-     // The only requirement is that it should be a valid JSON object, or else horrible things will happen.
-     extra = '{"mydata1": "foo bar", "mydata2": "lorem ipsum"}'
+    // You can inject your own extras like this. Maybe use the output of a script here, I don't know.
+    // The only requirement is that it should be a valid JSON object, or else horrible things will happen.
+    extra = '{"mydata1": "foo bar", "mydata2": "lorem ipsum"}'
 }
 
 repositories {
