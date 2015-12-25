@@ -15,7 +15,7 @@ public class Paperwork {
     public static final String DEFAULT_FILENAME = "paperwork.json";
     public static final String GIT_SHA = "gitSha";
     public static final String BUILD_TIME = "buildTime";
-    public static final String EXTRA = "extra";
+    public static final String EXTRAS = "extras";
 
     private final Context context;
     private String filename;
@@ -46,10 +46,10 @@ public class Paperwork {
         return json.optString(BUILD_TIME);
     }
 
-    public JSONObject getExtra() {
+    public JSONObject getExtras() {
         lazyInitJson();
 
-        return json.optJSONObject(EXTRA);
+        return json.optJSONObject(EXTRAS);
     }
 
     private void lazyInitJson() {
@@ -97,7 +97,7 @@ public class Paperwork {
     private void check(JSONObject jsonObject) {
         if (!jsonObject.has(GIT_SHA) ||
             !jsonObject.has(BUILD_TIME) ||
-            !jsonObject.has(EXTRA)) {
+            !jsonObject.has(EXTRAS)) {
 
             throw new PaperworkException("The file '%s' is missing paperwork data", filename);
         }
