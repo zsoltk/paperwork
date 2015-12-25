@@ -76,6 +76,8 @@ Lastly, add ```paperwork.json``` to your ```.gitignore```
 
 Contributions are welcome! Got a question, found a bug, have a new feature idea? Submit an issue.
 
+I'd love to hear about your usecase too, especially if it's not covered perfectly.
+
 
 ### License
 
