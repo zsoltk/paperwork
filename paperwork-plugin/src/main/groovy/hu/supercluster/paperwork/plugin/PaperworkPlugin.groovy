@@ -20,7 +20,7 @@ class PaperworkPlugin implements Plugin<Project> {
     }
 
     private File getFile(Project project) {
-        def file = project.file(project.paperwork.outputFilename)
+        def file = project.file(project.paperwork.filename)
         file.parentFile.mkdirs()
         file
     }
