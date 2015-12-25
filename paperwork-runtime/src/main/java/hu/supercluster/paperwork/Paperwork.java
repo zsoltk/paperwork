@@ -52,6 +52,12 @@ public class Paperwork {
         return json.optJSONObject(EXTRAS);
     }
 
+    public String getExtra(String key) {
+        lazyInitJson();
+
+        return getExtras().optString(key);
+    }
+
     private void lazyInitJson() {
         if (json == null) {
             try {
