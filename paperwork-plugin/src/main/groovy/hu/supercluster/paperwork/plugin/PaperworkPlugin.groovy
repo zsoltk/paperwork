@@ -6,12 +6,12 @@ import org.gradle.api.Project
 class PaperworkPlugin implements Plugin<Project> {
 
     void apply(Project project) {
-        project.extensions.create("paperwork", PaperworkPluginExtension)
+        project.extensions.create("paperwork", PaperworkPluginExtension, project)
         project.afterEvaluate({
             File file = getFile(project)
 
-            def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
-            def buildTime = new Date().format("yyyy-MM-dd'T'HH:mm:ss'Z'", TimeZone.getTimeZone("UTC"))
+            def gitSha = project.paperwork.gitSha
+            def buildTime = project.paperwork.buildTime
             def extras = project.paperwork.extras
 
             def paperwork = "{\"gitSha\":\"$gitSha\", \"buildTime\":\"$buildTime\", \"extras\":$extras}"
