@@ -36,36 +36,36 @@ public class Paperwork {
     }
 
     public String getGitSha() {
-        lazyInitJson();
+        initAndCheck();
 
         return json.optString(GIT_SHA);
     }
 
     public String getBuildTime() {
-        lazyInitJson();
+        initAndCheck();
 
         return json.optString(BUILD_TIME);
     }
 
     public String getEnv(String key) {
-        lazyInitJson();
+        initAndCheck();
 
         return json.optJSONObject(ENV).optString(key);
     }
 
     public JSONObject getExtras() {
-        lazyInitJson();
+        initAndCheck();
 
         return json.optJSONObject(EXTRAS);
     }
 
     public String getExtra(String key) {
-        lazyInitJson();
+        initAndCheck();
 
         return getExtras().optString(key);
     }
 
-    private void lazyInitJson() {
+    private void initAndCheck() {
         if (json == null) {
             try {
                 json = getJsonContents();
@@ -73,13 +73,13 @@ public class Paperwork {
             } catch (JSONException e) {
                 throw new PaperworkException("The file '%s' contains invalid JSON data", filename, e);
             }
+
+            check(json);
         }
     }
 
     private JSONObject getJsonContents() throws JSONException {
         JSONObject jsonObject = new JSONObject(getFileContents());
-
-        check(jsonObject);
 
         return jsonObject;
     }
