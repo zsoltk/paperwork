@@ -12,7 +12,10 @@ import hu.supercluster.paperwork.Paperwork;
 public class MainActivity extends AppCompatActivity {
     @Bind(R.id.gitSha) TextView gitSha;
     @Bind(R.id.buildTime) TextView buildTime;
-    @Bind(R.id.extras) TextView extras;
+    @Bind(R.id.env1) TextView env1;
+    @Bind(R.id.env2) TextView env2;
+    @Bind(R.id.extra1) TextView extra1;
+    @Bind(R.id.extra2) TextView extra2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
         gitSha.setText(paperwork.getGitSha());
         buildTime.setText(paperwork.getBuildTime());
-        extras.setText(paperwork.getExtras().toString());
+        env1.setText(paperwork.getEnv("USER"));
+        env2.setText(paperwork.getEnv("PWD"));
+        extra1.setText(paperwork.getExtra("mydata1"));
+        extra2.setText(paperwork.getExtra("mydata2"));
     }
 }
