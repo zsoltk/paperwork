@@ -36,6 +36,13 @@ Environment variables and injecting your own extras are supported. See the confi
 
 Incremental builds are not broken, yay!
 
+### Build time comparison
+Measured three consecutive builds per type, running gradle daemon, hitting "Run 'app'" in Android Studio without touching anything else. Generated info: git hash and build time (using seconds) so that it has a new value every time.
+
+* Without generating build info: 3.989s, 3.915s, 3.902s
+* Using BuildConfig fields: 14.843s, 13.844s, 13.194s
+* Using Paperwork: 4.356s, 4.075s, 4.042s
+
 ### Download and setup
 Add these dependencies to your ```build.gradle```:
 
