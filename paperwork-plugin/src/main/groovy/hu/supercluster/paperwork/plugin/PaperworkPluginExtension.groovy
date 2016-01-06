@@ -8,4 +8,8 @@ class PaperworkPluginExtension {
     PaperworkPluginExtension(project) {
         this.project = project
     }
+
+    public String gitSha() {
+        'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
+    }
 }
