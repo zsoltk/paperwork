@@ -28,4 +28,8 @@ class PaperworkPluginExtension {
     public String buildTime(String format, String timeZoneId) {
         new Date().format(format, TimeZone.getTimeZone(timeZoneId))
     }
+
+    public String env(String var) {
+        System.getenv(var)
+    }
 }
