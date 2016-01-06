@@ -9,8 +9,12 @@ class PaperworkPluginExtension {
         this.project = project
     }
 
+    public String shell(String cmd) {
+        cmd.execute([], project.rootDir).text.trim()
+    }
+
     public String gitSha() {
-        'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
+        shell('git rev-parse --short HEAD')
     }
 
     public String buildTime() {
