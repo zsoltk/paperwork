@@ -16,4 +16,8 @@ class PaperworkPluginExtension {
     public String buildTime(String format) {
         new Date().format(format)
     }
+
+    public String buildTime(String format, String timeZoneId) {
+        new Date().format(format, TimeZone.getTimeZone(timeZoneId))
+    }
 }
