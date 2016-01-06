@@ -13,6 +13,10 @@ class PaperworkPluginExtension {
         'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
     }
 
+    public String buildTime() {
+        new Date().getTime();
+    }
+
     public String buildTime(String format) {
         new Date().format(format)
     }
