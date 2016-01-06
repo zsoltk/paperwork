@@ -13,10 +13,6 @@ import java.io.InputStreamReader;
 
 public class Paperwork {
     public static final String DEFAULT_FILENAME = "paperwork.json";
-    public static final String GIT_SHA = "gitSha";
-    public static final String BUILD_TIME = "buildTime";
-    public static final String ENV = "env";
-    public static final String EXTRAS = "extras";
 
     private final Context context;
     private String filename;
@@ -35,53 +31,21 @@ public class Paperwork {
         this.filename = filename;
     }
 
-    public String getGitSha() {
-        initAndCheck();
+    public String get(String key) {
+        init();
 
-        return json.optString(GIT_SHA);
+        return json.optString(key);
     }
 
-    public String getBuildTime() {
-        initAndCheck();
-
-        return json.optString(BUILD_TIME);
-    }
-
-    public String getEnv(String key) {
-        initAndCheck();
-
-        return json.optJSONObject(ENV).optString(key);
-    }
-
-    public JSONObject getExtras() {
-        initAndCheck();
-
-        return json.optJSONObject(EXTRAS);
-    }
-
-    public String getExtra(String key) {
-        initAndCheck();
-
-        return getExtras().optString(key);
-    }
-
-    private void initAndCheck() {
+    private void init() {
         if (json == null) {
             try {
-                json = getJsonContents();
+                json = new JSONObject(getFileContents());
 
             } catch (JSONException e) {
                 throw new PaperworkException("The file '%s' contains invalid JSON data", filename, e);
             }
-
-            check(json);
         }
-    }
-
-    private JSONObject getJsonContents() throws JSONException {
-        JSONObject jsonObject = new JSONObject(getFileContents());
-
-        return jsonObject;
     }
 
     @NonNull
@@ -105,15 +69,5 @@ public class Paperwork {
         }
 
         return builder.toString();
-    }
-
-    private void check(JSONObject jsonObject) {
-        if (!jsonObject.has(GIT_SHA) ||
-            !jsonObject.has(BUILD_TIME) ||
-            !jsonObject.has(ENV) ||
-            !jsonObject.has(EXTRAS)) {
-
-            throw new PaperworkException("The file '%s' is missing paperwork data", filename);
-        }
     }
 }
