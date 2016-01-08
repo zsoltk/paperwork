@@ -15,7 +15,7 @@ public class Paperwork {
     public static final String DEFAULT_FILENAME = "paperwork.json";
 
     private final Context context;
-    private String filename;
+    private final String filename;
     private JSONObject json;
 
     public Paperwork(Context context) {
@@ -24,10 +24,6 @@ public class Paperwork {
 
     public Paperwork(Context context, String filename) {
         this.context = context;
-        this.filename = filename;
-    }
-
-    public void setFilename(String filename) {
         this.filename = filename;
     }
 
