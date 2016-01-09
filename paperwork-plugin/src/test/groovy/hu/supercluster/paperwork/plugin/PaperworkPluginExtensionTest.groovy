@@ -78,4 +78,11 @@ class PaperworkPluginExtensionTest {
 
         assert result == TEST_STRING
     }
+
+    @Test
+    public void testEnv() {
+        def key = "PATH"
+
+        assert extension.env(key) == System.getenv(key)
+    }
 }
