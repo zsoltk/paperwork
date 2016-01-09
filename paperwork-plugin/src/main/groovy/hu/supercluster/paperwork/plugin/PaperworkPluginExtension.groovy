@@ -17,6 +17,10 @@ class PaperworkPluginExtension {
         shell('git rev-parse --short HEAD')
     }
 
+    public String gitTag() {
+        shell('git describe --tags --abbrev=0')
+    }
+
     public String buildTime() {
         new Date().getTime();
     }
