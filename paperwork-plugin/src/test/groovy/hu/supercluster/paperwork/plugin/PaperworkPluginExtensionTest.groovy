@@ -1,17 +1,28 @@
 package hu.supercluster.paperwork.plugin
 
 import org.gradle.testfixtures.ProjectBuilder
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
 class PaperworkPluginExtensionTest {
     private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
-    private def extension;
+    private static final String TEST_STRING = "Test string 123"
+    private def extension
+    private File baseDir
 
     @Before
     public void setUp() {
-        def project = ProjectBuilder.builder().build()
+        baseDir = new File("build/" + UUID.randomUUID().toString())
+        baseDir.mkdirs()
+
+        def project = ProjectBuilder.builder().withProjectDir(baseDir).build()
         extension = new PaperworkPluginExtension(project)
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        baseDir.deleteDir()
     }
 
     @Test
@@ -55,5 +66,16 @@ class PaperworkPluginExtensionTest {
 
     private boolean fallsWithinASecond(long time1, long time2) {
         Math.abs(time1 - time2) < 1000
+    }
+
+    @Test
+    public void testShell() {
+        def testScript = new File(baseDir, "test.sh")
+        testScript.write(String.format('echo "%s"', TEST_STRING))
+        testScript.setExecutable(true)
+
+        def result = extension.shell(testScript.absolutePath)
+
+        assert result == TEST_STRING
     }
 }
