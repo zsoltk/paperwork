@@ -21,6 +21,10 @@ class PaperworkPluginExtension {
         shell('git describe --tags --abbrev=0')
     }
 
+    public String gitInfo() {
+        shell('git describe --always --dirty')
+    }
+
     public String buildTime() {
         new Date().getTime();
     }
