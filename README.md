@@ -1,4 +1,6 @@
 # Paperwork
+![](https://travis-ci.org/zsoltk/paperwork.svg?branch=master)
+
 Generate build info for your Android project without breaking incremental compilation
 
 ### The problem
