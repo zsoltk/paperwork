@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 
+import hu.supercluster.paperwork.integration.matcher.GitShaMatcher;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -22,5 +24,10 @@ public class MainActivityTest {
     @Test
     public void shouldHaveCorrectValueForSimpleKey() {
         onView(withId(R.id.simpleKey)).check(matches(withText(is("simpleValue"))));
+    }
+
+    @Test
+    public void shouldDisplayGitSha() {
+        onView(withId(R.id.gitSha)).check(matches(withText(new GitShaMatcher())));
     }
 }
