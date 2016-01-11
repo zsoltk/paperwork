@@ -8,6 +8,9 @@ import org.junit.Test;
 import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 
+import java.util.concurrent.TimeUnit;
+
+import hu.supercluster.paperwork.integration.matcher.BuildTimeMatcher;
 import hu.supercluster.paperwork.integration.matcher.GitShaMatcher;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -19,6 +22,11 @@ import static org.hamcrest.CoreMatchers.is;
 
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
+    public static final long TIMESTAMP_THRESHOLD = TimeUnit.MINUTES.toMillis(1);
+    public static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static final String TIMEZONE_ID_1 = "GMT";
+    public static final String TIMEZONE_ID_2 = "Pacific/Honolulu";
+
     @Rule
     public TestRule rule = new ActivityTestRule<>(MainActivity.class);
 
@@ -40,5 +48,25 @@ public class MainActivityTest {
     @Test
     public void shouldDisplayGitInfo() {
         onView(withId(R.id.gitInfo)).check(matches(withText(any(String.class))));
+    }
+
+    @Test
+    public void shouldHaveRelevantBuildTime1() {
+        onView(withId(R.id.buildTime1)).check(matches(withText(new BuildTimeMatcher(TIMESTAMP_THRESHOLD))));
+    }
+
+    @Test
+    public void shouldHaveRelevantBuildTime2() {
+        onView(withId(R.id.buildTime2)).check(matches(withText(new BuildTimeMatcher(TIMESTAMP_THRESHOLD, DATETIME_FORMAT))));
+    }
+
+    @Test
+    public void shouldHaveRelevantBuildTime3() {
+        onView(withId(R.id.buildTime3)).check(matches(withText(new BuildTimeMatcher(TIMESTAMP_THRESHOLD, DATETIME_FORMAT, TIMEZONE_ID_1))));
+    }
+
+    @Test
+    public void shouldHaveRelevantBuildTime4() {
+        onView(withId(R.id.buildTime4)).check(matches(withText(new BuildTimeMatcher(TIMESTAMP_THRESHOLD, DATETIME_FORMAT, TIMEZONE_ID_2))));
     }
 }

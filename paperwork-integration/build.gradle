@@ -17,8 +17,9 @@ paperwork {
     set = [
             simpleKey:  "simpleValue",
             buildTime1: buildTime(),
-            buildTime2: buildTime("yyyy-MM-dd'T'HH:mm:ss'Z'"),
-            buildTime3: buildTime("yyyy-MM-dd'T'HH:mm:ss'Z'", "GMT+1"),
+            buildTime2: buildTime("yyyy-MM-dd HH:mm:ss"),
+            buildTime3: buildTime("yyyy-MM-dd HH:mm:ss", "GMT"),
+            buildTime4: buildTime("yyyy-MM-dd HH:mm:ss", "Pacific/Honolulu"),
             gitSha:     gitSha(),
             gitTag:     gitTag(),
             gitInfo:    gitInfo(),
@@ -51,6 +52,20 @@ android {
         textReport true
         textOutput 'stdout'
     }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/MANIFEST.MF'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
 }
 
 dependencies {
@@ -65,4 +80,5 @@ dependencies {
     androidTestCompile "com.android.support.test:rules:0.4.1"
     androidTestCompile "com.android.support.test.espresso:espresso-core:2.2.1"
     androidTestCompile "org.hamcrest:hamcrest-library:1.1"
+    androidTestCompile "joda-time:joda-time:2.9.1"
 }
