@@ -36,4 +36,9 @@ public class MainActivityTest {
     public void shouldDisplayGitTag() {
         onView(withId(R.id.gitTag)).check(matches(withText(any(String.class))));
     }
+
+    @Test
+    public void shouldDisplayGitInfo() {
+        onView(withId(R.id.gitInfo)).check(matches(withText(any(String.class))));
+    }
 }
