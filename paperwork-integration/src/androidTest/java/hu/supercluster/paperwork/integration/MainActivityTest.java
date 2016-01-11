@@ -22,7 +22,7 @@ import static org.hamcrest.CoreMatchers.is;
 
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
-    public static final long TIMESTAMP_THRESHOLD = TimeUnit.MINUTES.toMillis(1);
+    public static final long TIMESTAMP_THRESHOLD = TimeUnit.MINUTES.toMillis(10);
     public static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
     public static final String TIMEZONE_ID_1 = "GMT";
     public static final String TIMEZONE_ID_2 = "Pacific/Honolulu";
