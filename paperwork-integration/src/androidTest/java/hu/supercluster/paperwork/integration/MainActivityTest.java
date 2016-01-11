@@ -14,6 +14,7 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.any;
 import static org.hamcrest.CoreMatchers.is;
 
 @RunWith(AndroidJUnit4.class)
@@ -29,5 +30,10 @@ public class MainActivityTest {
     @Test
     public void shouldDisplayGitSha() {
         onView(withId(R.id.gitSha)).check(matches(withText(new GitShaMatcher())));
+    }
+
+    @Test
+    public void shouldDisplayGitTag() {
+        onView(withId(R.id.gitTag)).check(matches(withText(any(String.class))));
     }
 }
