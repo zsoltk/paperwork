@@ -69,4 +69,9 @@ public class MainActivityTest {
     public void shouldHaveRelevantBuildTime4() {
         onView(withId(R.id.buildTime4)).check(matches(withText(new BuildTimeMatcher(TIMESTAMP_THRESHOLD, DATETIME_FORMAT, TIMEZONE_ID_2))));
     }
+
+    @Test
+    public void shouldHaveCorrectValueForShell() {
+        onView(withId(R.id.shell)).check(matches(withText("String output of test.sh")));
+    }
 }
