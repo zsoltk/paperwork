@@ -74,4 +74,9 @@ public class MainActivityTest {
     public void shouldHaveCorrectValueForShell() {
         onView(withId(R.id.shell)).check(matches(withText("String output of test.sh")));
     }
+
+    @Test
+    public void shouldDisplayEnv() {
+        onView(withId(R.id.env)).check(matches(withText(any(String.class))));
+    }
 }
