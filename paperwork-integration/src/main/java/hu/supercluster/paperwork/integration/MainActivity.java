@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showPaperwork() {
-        final Paperwork paperwork = new Paperwork(this);
+        final Paperwork paperwork = new Paperwork(this, "integration.json");
 
         simpleKey.setText(paperwork.get("simpleKey"));
         buildTime1.setText(paperwork.get("buildTime1"));

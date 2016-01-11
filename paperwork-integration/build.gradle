@@ -14,6 +14,8 @@ apply plugin: 'com.android.application'
 apply plugin: PaperworkPlugin.class
 
 paperwork {
+    filename = 'src/main/assets/integration.json'
+
     set = [
             simpleKey:  "simpleValue",
             buildTime1: buildTime(),
