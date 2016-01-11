@@ -1,0 +1,62 @@
+import hu.supercluster.paperwork.plugin.PaperworkPlugin
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.5.0'
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: PaperworkPlugin.class
+
+paperwork {
+    set = [
+            simpleKey:  "simpleValue",
+            buildTime1: buildTime(),
+            buildTime2: buildTime("yyyy-MM-dd'T'HH:mm:ss'Z'"),
+            buildTime3: buildTime("yyyy-MM-dd'T'HH:mm:ss'Z'", "GMT+1"),
+            gitSha:     gitSha(),
+            gitTag:     gitTag(),
+            gitInfo:    gitInfo(),
+            shell:      shell("scripts/test.sh"),
+            someEnv:    env("USER")
+    ]
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "hu.supercluster.paperwork.integration"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        textReport true
+        textOutput 'stdout'
+    }
+}
+
+dependencies {
+    compile project(':paperwork-runtime')
+
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.jakewharton:butterknife:7.0.1'
+
+    testCompile 'junit:junit:4.12'
+}
