@@ -58,8 +58,8 @@ public class MainActivityTest {
     }
 
     @Test
-    public void shouldHaveRelevantBuildTime2() {
-        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.buildTime2)).check(matches(withText(new BuildTimeMatcher(TIMESTAMP_THRESHOLD, DATETIME_FORMAT))));
+    public void shouldDisplayBuildTime2() {
+        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.buildTime2)).check(matches(withText(any(String.class))));
     }
 
     @Test
