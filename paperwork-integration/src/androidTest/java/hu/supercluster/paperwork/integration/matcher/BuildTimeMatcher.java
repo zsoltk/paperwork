@@ -57,6 +57,12 @@ public class BuildTimeMatcher extends TypeSafeMatcher<String> {
 
     @Override
     public void describeTo(Description description) {
-        description.appendText(" holds a past timestamp not older than: " + threshold + " millisecs");
+        description.appendText(
+                String.format(" holds a timestamp not older than: %d millisecs (current timestamp: %d, %s)",
+                    threshold,
+                    DateTime.now().getMillis(),
+                    DateTime.now().toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss"))
+                )
+        );
     }
 }
