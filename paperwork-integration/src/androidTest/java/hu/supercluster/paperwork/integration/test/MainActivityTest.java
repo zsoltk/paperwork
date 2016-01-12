@@ -1,5 +1,6 @@
-package hu.supercluster.paperwork.integration;
+package hu.supercluster.paperwork.integration.test;
 
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -10,6 +11,7 @@ import org.junit.runner.RunWith;
 
 import java.util.concurrent.TimeUnit;
 
+import hu.supercluster.paperwork.integration.*;
 import hu.supercluster.paperwork.integration.matcher.BuildTimeMatcher;
 import hu.supercluster.paperwork.integration.matcher.GitShaMatcher;
 
@@ -32,51 +34,51 @@ public class MainActivityTest {
 
     @Test
     public void shouldHaveCorrectValueForSimpleKey() {
-        onView(withId(R.id.simpleKey)).check(matches(withText(is("simpleValue"))));
+        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.simpleKey)).check(matches(withText(is("simpleValue"))));
     }
 
     @Test
     public void shouldDisplayGitSha() {
-        onView(withId(R.id.gitSha)).check(matches(withText(new GitShaMatcher())));
+        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.gitSha)).check(matches(withText(new GitShaMatcher())));
     }
 
     @Test
     public void shouldDisplayGitTag() {
-        onView(withId(R.id.gitTag)).check(matches(withText(any(String.class))));
+        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.gitTag)).check(matches(withText(any(String.class))));
     }
 
     @Test
     public void shouldDisplayGitInfo() {
-        onView(withId(R.id.gitInfo)).check(matches(withText(any(String.class))));
+        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.gitInfo)).check(matches(withText(any(String.class))));
     }
 
     @Test
     public void shouldHaveRelevantBuildTime1() {
-        onView(withId(R.id.buildTime1)).check(matches(withText(new BuildTimeMatcher(TIMESTAMP_THRESHOLD))));
+        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.buildTime1)).check(matches(withText(new BuildTimeMatcher(TIMESTAMP_THRESHOLD))));
     }
 
     @Test
     public void shouldHaveRelevantBuildTime2() {
-        onView(withId(R.id.buildTime2)).check(matches(withText(new BuildTimeMatcher(TIMESTAMP_THRESHOLD, DATETIME_FORMAT))));
+        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.buildTime2)).check(matches(withText(new BuildTimeMatcher(TIMESTAMP_THRESHOLD, DATETIME_FORMAT))));
     }
 
     @Test
     public void shouldHaveRelevantBuildTime3() {
-        onView(withId(R.id.buildTime3)).check(matches(withText(new BuildTimeMatcher(TIMESTAMP_THRESHOLD, DATETIME_FORMAT, TIMEZONE_ID_1))));
+        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.buildTime3)).check(matches(withText(new BuildTimeMatcher(TIMESTAMP_THRESHOLD, DATETIME_FORMAT, TIMEZONE_ID_1))));
     }
 
     @Test
     public void shouldHaveRelevantBuildTime4() {
-        onView(withId(R.id.buildTime4)).check(matches(withText(new BuildTimeMatcher(TIMESTAMP_THRESHOLD, DATETIME_FORMAT, TIMEZONE_ID_2))));
+        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.buildTime4)).check(matches(withText(new BuildTimeMatcher(TIMESTAMP_THRESHOLD, DATETIME_FORMAT, TIMEZONE_ID_2))));
     }
 
     @Test
     public void shouldHaveCorrectValueForShell() {
-        onView(withId(R.id.shell)).check(matches(withText("String output of test.sh")));
+        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.shell)).check(matches(withText("String output of test.sh")));
     }
 
     @Test
     public void shouldDisplayEnv() {
-        onView(withId(R.id.env)).check(matches(withText(any(String.class))));
+        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.env)).check(matches(withText(any(String.class))));
     }
 }
