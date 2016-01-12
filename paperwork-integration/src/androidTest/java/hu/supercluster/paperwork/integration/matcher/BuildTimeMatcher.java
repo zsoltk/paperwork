@@ -32,7 +32,7 @@ public class BuildTimeMatcher extends TypeSafeMatcher<String> {
             long timestamp = convertToTimestamp(item);
             long diff = DateTime.now().minus(timestamp).getMillis();
 
-            return 0 < diff && diff < threshold;
+            return Math.abs(diff) < threshold;
 
         } catch (NumberFormatException e) {
             return false;
