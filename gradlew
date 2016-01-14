@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+scripts/refresh-integration-dependencies.sh
+
 ##############################################################################
 ##
 ##  Gradle start up script for UN*X

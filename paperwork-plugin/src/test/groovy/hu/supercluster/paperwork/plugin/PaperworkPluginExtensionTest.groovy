@@ -5,9 +5,12 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
+import java.util.concurrent.TimeUnit
+
 class PaperworkPluginExtensionTest {
     private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
     private static final String TEST_STRING = "Test string 123"
+    private static final int TIMESTAMP_THRESHOLD = TimeUnit.SECONDS.toMillis(10)
     private def extension
     private File baseDir
 
@@ -40,7 +43,7 @@ class PaperworkPluginExtensionTest {
         def buildTime = extension.buildTime() as long
         def currentTime = new Date().getTime()
 
-        assert fallsWithinASecond(buildTime, currentTime);
+        assert fallsWithinThreshold(buildTime, currentTime);
     }
 
     @Test
@@ -49,7 +52,7 @@ class PaperworkPluginExtensionTest {
         def parseBack = new Date().parse(DATE_FORMAT, buildTime).getTime();
         def currentTime = new Date().getTime()
 
-        assert fallsWithinASecond(parseBack, currentTime);
+        assert fallsWithinThreshold(parseBack, currentTime);
     }
 
     @Test
@@ -61,11 +64,11 @@ class PaperworkPluginExtensionTest {
         def parseBack = new Date().parse(DATE_FORMAT, buildTime, timeZone).getTime();
         def currentTime = new Date().getTime()
 
-        assert fallsWithinASecond(parseBack, currentTime);
+        assert fallsWithinThreshold(parseBack, currentTime);
     }
 
-    private boolean fallsWithinASecond(long time1, long time2) {
-        Math.abs(time1 - time2) < 1000
+    private boolean fallsWithinThreshold(long time1, long time2) {
+        Math.abs(time1 - time2) < TIMESTAMP_THRESHOLD
     }
 
     @Test

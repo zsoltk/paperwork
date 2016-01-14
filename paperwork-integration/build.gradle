@@ -1,0 +1,88 @@
+import hu.supercluster.paperwork.plugin.PaperworkPlugin
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.5.0'
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: PaperworkPlugin.class
+
+paperwork {
+    filename = 'src/main/assets/integration.json'
+
+    set = [
+            simpleKey:  "simpleValue",
+            buildTime1: buildTime(),
+            buildTime2: buildTime("G"),
+            buildTime3: buildTime("yyyy-MM-dd HH:mm:ss", "GMT"),
+            buildTime4: buildTime("yyyy-MM-dd HH:mm:ss", "Pacific/Honolulu"),
+            gitSha:     gitSha(),
+            gitTag:     gitTag(),
+            gitInfo:    gitInfo(),
+            shell:      shell("scripts/test.sh"),
+            someEnv:    env("USER")
+    ]
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "hu.supercluster.paperwork.integration"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "hu.supercluster.paperwork.integration.runner.PaperworkTestRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        textReport true
+        textOutput 'stdout'
+        warningsAsErrors true
+        abortOnError true
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/MANIFEST.MF'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+}
+
+dependencies {
+    compile project(':paperwork-runtime')
+
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.jakewharton:butterknife:7.0.1'
+
+    androidTestCompile 'junit:junit:4.12'
+    androidTestCompile "com.android.support:support-annotations:23.1.1"
+    androidTestCompile "com.android.support.test:runner:0.4.1"
+    androidTestCompile "com.android.support.test:rules:0.4.1"
+    androidTestCompile "com.android.support.test.espresso:espresso-core:2.2.1"
+    androidTestCompile "org.hamcrest:hamcrest-library:1.1"
+    androidTestCompile "joda-time:joda-time:2.9.1"
+}
