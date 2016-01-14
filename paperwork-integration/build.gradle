@@ -19,7 +19,7 @@ paperwork {
     set = [
             simpleKey:  "simpleValue",
             buildTime1: buildTime(),
-            buildTime2: buildTime("yyyy-MM-dd HH:mm:ss"),
+            buildTime2: buildTime("G"),
             buildTime3: buildTime("yyyy-MM-dd HH:mm:ss", "GMT"),
             buildTime4: buildTime("yyyy-MM-dd HH:mm:ss", "Pacific/Honolulu"),
             gitSha:     gitSha(),

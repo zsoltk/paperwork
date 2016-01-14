@@ -59,7 +59,7 @@ public class MainActivityTest {
 
     @Test
     public void shouldDisplayBuildTime2() {
-        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.buildTime2)).check(matches(withText(any(String.class))));
+        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.buildTime2)).check(matches(withText("AD")));
     }
 
     @Test
