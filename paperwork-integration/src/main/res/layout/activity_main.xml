@@ -10,16 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="hu.supercluster.paperwork.example.MainActivity">
 
-    <!--key1:       "value1",-->
-    <!--git1:       gitSha(),-->
-    <!--git2:       gitTag(),-->
-    <!--git3:       gitInfo(),-->
-    <!--buildTime1: buildTime(),-->
-    <!--buildTime2: buildTime("yyyy-MM-dd'T'HH:mm:ss'Z'"),-->
-    <!--buildTime3: buildTime("yyyy-MM-dd'T'HH:mm:ss'Z'", "GMT+1"),-->
-    <!--script:     shell("scripts/test.sh"),-->
-    <!--someEnv:    env("USER")-->
-
     <TextView
         android:id="@+id/simpleKey"
         android:layout_width="match_parent"
