@@ -10,12 +10,16 @@ import hu.supercluster.paperwork.Paperwork;
 
 
 public class MainActivity extends AppCompatActivity {
+    @Bind(R.id.simpleKey) TextView simpleKey;
+    @Bind(R.id.buildTime1) TextView buildTime1;
+    @Bind(R.id.buildTime2) TextView buildTime2;
+    @Bind(R.id.buildTime3) TextView buildTime3;
+    @Bind(R.id.buildTime4) TextView buildTime4;
     @Bind(R.id.gitSha) TextView gitSha;
-    @Bind(R.id.buildTime) TextView buildTime;
-    @Bind(R.id.env1) TextView env1;
-    @Bind(R.id.env2) TextView env2;
-    @Bind(R.id.extra1) TextView extra1;
-    @Bind(R.id.extra2) TextView extra2;
+    @Bind(R.id.gitTag) TextView gitTag;
+    @Bind(R.id.gitInfo) TextView gitInfo;
+    @Bind(R.id.shell) TextView shell;
+    @Bind(R.id.env) TextView env;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +32,15 @@ public class MainActivity extends AppCompatActivity {
     private void showPaperwork() {
         final Paperwork paperwork = new Paperwork(this);
 
-        gitSha.setText(paperwork.getGitSha());
-        buildTime.setText(paperwork.getBuildTime());
-        env1.setText(paperwork.getEnv("USER"));
-        env2.setText(paperwork.getEnv("PWD"));
-        extra1.setText(paperwork.getExtra("mydata1"));
-        extra2.setText(paperwork.getExtra("mydata2"));
+        simpleKey.setText(paperwork.get("simpleKey"));
+        buildTime1.setText(paperwork.get("buildTime1"));
+        buildTime2.setText(paperwork.get("buildTime2"));
+        buildTime3.setText(paperwork.get("buildTime3"));
+        buildTime4.setText(paperwork.get("buildTime4"));
+        gitSha.setText(paperwork.get("gitSha"));
+        gitTag.setText(paperwork.get("gitTag"));
+        gitInfo.setText(paperwork.get("gitInfo"));
+        shell.setText(paperwork.get("shell"));
+        env.setText(paperwork.get("someEnv"));
     }
 }

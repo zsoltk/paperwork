@@ -1,5 +1,5 @@
 # Paperwork
-![](https://travis-ci.org/zsoltk/paperwork.svg?branch=master)
+[![Build Status](https://travis-ci.org/zsoltk/paperwork.svg?branch=master)](https://travis-ci.org/zsoltk/paperwork)
 
 Generate build info for your Android project without breaking incremental compilation
 
@@ -24,26 +24,24 @@ But this will break incremental builds, resulting in increased build times all t
 
 
 ### What this lib offers
-Paperwork will generate this information (and more) for you and put it into a ```paperwork.json``` file inside your assets folder.
+Paperwork can generate this information (and more) for you and put it into a ```paperwork.json``` file inside your assets folder.
 During runtime, you can access them lazy-loaded through getters like this:
 ```java
 Paperwork paperwork = new Paperwork(context);
-String gitSha = paperwork.getGitSha();
-String buildTime = paperwork.getBuildTime();
-String extra1 = paperwork.getExtra("myextra1");
-String env1 = paperwork.getEnv("PWD");
+String gitSha = paperwork.get("gitSha");
+String buildTime = paperwork.get("buildTime");
 ``` 
 
-Environment variables and injecting your own extras are supported. See the configuration below.  
+Many helpers are available to generate data for the most common scenarios. See the configuration below.  
 
 Incremental builds are not broken, yay!
 
 ### Build time comparison
 Measured three consecutive builds per type, running gradle daemon, hitting "Run 'app'" in Android Studio without touching anything else. Generated info: git hash and build time (using seconds) so that it has a new value every time.
 
-* Without generating build info: 3.989s, 3.915s, 3.902s
-* Using BuildConfig fields: 14.843s, 13.844s, 13.194s
-* Using Paperwork: 4.356s, 4.075s, 4.042s
+* Without generating build info: *3.989s*, *3.915s*, *3.902s*
+* Using BuildConfig fields: *14.843s*, *13.844s*, *13.194s*
+* Using Paperwork: *4.356s*, *4.075s*, *4.042s*
 
 ### Download and setup
 Add these dependencies to your ```build.gradle```:
@@ -55,48 +53,100 @@ buildscript {
     }
     
     dependencies {
-        classpath 'hu.supercluster:paperwork-plugin:1.1.0'
+        classpath 'hu.supercluster:paperwork-plugin:1.2.0'
     }
 }
 
 apply plugin: 'hu.supercluster.paperwork'
 
-// Completely optional configuration block, can be omitted:
 paperwork {
-    // You can generate the file somewhere else. Note however, that in order for it to be available
-    // in Paperwork runtime, it has to be in the assets folder, and if the filename is not
-    // paperwork.json, you have to inject its name either in the constructor, or through
-    // Paperwork#setFilename().
-    filename = 'src/main/assets/paperwork.json'
-    
-    // List any environment variables of interest to you. 
-    // Access them later with Paperwork#getEnv(key).
-    env = ['USER', 'PWD']
-    
-    // If for whatever reason you don't like the default format for git SHA and build time,
-    // you can override them:
-    gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
-    buildTime = new Date().format("yyyy-MM-dd'T'HH:mm:ss'Z'", TimeZone.getTimeZone("UTC"))
-     
-    // You can inject your own extras like this, and access them later with Paperwork#getExtra(key).
-    // Maybe use the output of a script here, I don't know. The only requirement is that it
-    // should be a valid JSON object, or else horrible things will happen.
-    extras = '{"mydata1": "foo bar", "mydata2": "lorem ipsum"}'
+    // Configuration comes here, see next section for details
 }
     
 dependencies {
-    compile 'hu.supercluster:paperwork:1.1.0'
+    compile 'hu.supercluster:paperwork:1.2.0'
 }
 ```
 
 Lastly, don't forget to add ```paperwork.json``` to your ```.gitignore``` file. 
 
+### Configuration
+Paperwork doesn't generate anything by default, you have to define whatever data you need in simple key-value pairings:
+
+```groovy
+paperwork {
+    set: [
+        someKey: "someValue", 
+        foo:     "bar"
+    ] 
+}
+```
+
+All the data will be available at runtime by querying for your own defined keys:
+
+```java
+Paperwork paperwork = new Paperwork(context);
+String data1 = paperwork.get("someKey");        // will return "someValue"
+String data1 = paperwork.get("foo");            // will return "bar"
+```
+
+Paperwork comes with a handful of helper methods you can use to generate dynamic build-time data:
+```groovy
+paperwork {
+    set: [
+        // simple unix timestamp (ms)
+        buildTime1: buildTime(),
+        
+        //  formatted date string
+        buildTime2: buildTime("yyyy-MM-dd HH:mm:ss"),
+        
+        //  formatted date string for a given timezone
+        buildTime3: buildTime("yyyy-MM-dd HH:mm:ss", "GMT"),
+        
+        // the current git SHA
+        gitSha: gitSha(),
+        
+        // the last git tag (lightweight tags included)
+        gitTag: gitTag(),
+        
+        // the last tag +
+        // how many commits ahead of that tag are we now in the working tree +
+        // current hash +
+        // whether the working tree has uncommited changes
+        // e.g. "v2.1.0-71-gb88c59a-dirty"
+        gitInfo: gitInfo(),
+        
+        // runs a shell command and returns its output (doesn't have to be a script)
+        shell: shell("scripts/test.sh"),
+        
+        // returns the value of an environment variable
+        someEnv: env("USER")
+    ] 
+}
+```
+
+You can also change the default filename or generate the file somewhere else:
+
+```groovy
+paperwork {
+    filename = 'src/main/assets/paperwork.json'
+}
+```
+
+Note however, that in order for it to be available in Paperwork runtime,
+it has to be in the assets folder, and if the filename is not
+paperwork.json, you have to inject its name in the constructor:
+
+```java
+Paperwork paperwork = new Paperwork(context, "paperwork.json");
+```
+
 
 ### Contributing
 
-Contributions are welcome! Got a question, found a bug, have a new feature idea? Submit an issue.
+Contributions are welcome! Got a question, found a bug, have a new helper method idea? Submit an issue and discuss it!
 
-I'd love to hear about your usecase too, especially if it's not covered perfectly.
+I'd love to hear about your use case too, especially if it's not covered perfectly.
 
 
 ### License

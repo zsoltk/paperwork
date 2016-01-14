@@ -5,7 +5,7 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:1.5.0'
-        classpath 'hu.supercluster:paperwork-plugin:1.1.0'
+        classpath 'hu.supercluster:paperwork-plugin:1.2.0'
     }
 }
 
@@ -13,8 +13,18 @@ apply plugin: 'com.android.application'
 apply plugin: 'hu.supercluster.paperwork'
 
 paperwork {
-    env = ['USER', 'PWD']
-    extras = '{"mydata1": "foo bar", "mydata2": "lorem ipsum"}'
+    set = [
+            simpleKey:  "simpleValue",
+            buildTime1: buildTime(),
+            buildTime2: buildTime("yyyy-MM-dd HH:mm:ss"),
+            buildTime3: buildTime("yyyy-MM-dd HH:mm:ss", "GMT"),
+            buildTime4: buildTime("yyyy-MM-dd HH:mm:ss", "Pacific/Honolulu"),
+            gitSha:     gitSha(),
+            gitTag:     gitTag(),
+            gitInfo:    gitInfo(),
+            shell:      shell("scripts/test.sh"),
+            someEnv:    env("USER")
+    ]
 }
 
 android {
@@ -45,7 +55,7 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'hu.supercluster:paperwork:1.1.0'
+    compile 'hu.supercluster:paperwork:1.2.0'
 
     testCompile 'junit:junit:4.12'
 }
