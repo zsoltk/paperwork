@@ -53,6 +53,8 @@ android {
     lintOptions {
         textReport true
         textOutput 'stdout'
+        warningsAsErrors true
+        abortOnError true
     }
 
     packagingOptions {
