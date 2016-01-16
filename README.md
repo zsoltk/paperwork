@@ -4,9 +4,9 @@
 Generate build info for your Android project without breaking incremental compilation
 
 ### The problem
-You want to include the git hash of the last commit and build time into your project, so that you can use their values in your crash reporting tool (for example).
+A common use case is that you want to include the git hash of the last commit and build time into your project, so that you can use their values in your crash reporting tool (for example).
 
-The easiest way to do this is to generate them into your BuildConfig by adding these to your ```build.gradle```
+The easiest way to do this is to generate them into your ```BuildConfig``` by adding these to your ```build.gradle```
 
 ```groovy
 def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
@@ -24,17 +24,17 @@ But this will break incremental builds, resulting in increased build times all t
 
 
 ### What this lib offers
-Paperwork can generate this information (and more) for you and put it into a ```paperwork.json``` file inside your assets folder.
-During runtime, you can access them lazy-loaded through getters like this:
+Paperwork can generate this information (and more) for you, and put it into a ```paperwork.json``` file inside your assets folder instead of using ```BuildConfig```, and helps you read it from there:
+
 ```java
 Paperwork paperwork = new Paperwork(context);
 String gitSha = paperwork.get("gitSha");
 String buildTime = paperwork.get("buildTime");
 ``` 
 
-Many helpers are available to generate data for the most common scenarios. See the configuration below.  
+Not just git hash, not just build time: you define what gets generated, and you can use anything that otherwise would break incremental builds.
 
-Incremental builds are not broken, yay!
+Many helpers are available for the most common scenarios. See the configuration below.
 
 ### Build time comparison
 Measured three consecutive builds per type, running gradle daemon, hitting "Run 'app'" in Android Studio without touching anything else. Generated info: git hash and build time (using seconds) so that it has a new value every time.
@@ -71,13 +71,13 @@ dependencies {
 Lastly, don't forget to add ```paperwork.json``` to your ```.gitignore``` file. 
 
 ### Configuration
-Paperwork doesn't generate anything by default, you have to define whatever data you need in simple key-value pairings:
+Paperwork doesn't generate anything by default, you have to define whatever data you need in simple key-value pairings. For a list of helper methods you can use, see next section.
 
 ```groovy
 paperwork {
     set: [
-        someKey: "someValue", 
-        foo:     "bar"
+        someKey1: "someValue",
+        someKey2: someHelperMethod()
     ] 
 }
 ```
@@ -86,43 +86,8 @@ All the data will be available at runtime by querying for your own defined keys:
 
 ```java
 Paperwork paperwork = new Paperwork(context);
-String data1 = paperwork.get("someKey");        // will return "someValue"
-String data1 = paperwork.get("foo");            // will return "bar"
-```
-
-Paperwork comes with a handful of helper methods you can use to generate dynamic build-time data:
-```groovy
-paperwork {
-    set: [
-        // simple unix timestamp (ms)
-        buildTime1: buildTime(),
-        
-        //  formatted date string
-        buildTime2: buildTime("yyyy-MM-dd HH:mm:ss"),
-        
-        //  formatted date string for a given timezone
-        buildTime3: buildTime("yyyy-MM-dd HH:mm:ss", "GMT"),
-        
-        // the current git SHA
-        gitSha: gitSha(),
-        
-        // the last git tag (lightweight tags included)
-        gitTag: gitTag(),
-        
-        // the last tag +
-        // how many commits ahead of that tag are we now in the working tree +
-        // current hash +
-        // whether the working tree has uncommited changes
-        // e.g. "v2.1.0-71-gb88c59a-dirty"
-        gitInfo: gitInfo(),
-        
-        // runs a shell command and returns its output (doesn't have to be a script)
-        shell: shell("scripts/test.sh"),
-        
-        // returns the value of an environment variable
-        someEnv: env("USER")
-    ] 
-}
+String data1 = paperwork.get("someKey1");        // will return "someValue"
+String data1 = paperwork.get("someKey2");        // will return the result of someHelperMethod()
 ```
 
 You can also change the default filename or generate the file somewhere else:
@@ -140,6 +105,57 @@ paperwork.json, you have to inject its name in the constructor:
 ```java
 Paperwork paperwork = new Paperwork(context, "paperwork.json");
 ```
+
+
+### Helpers
+
+```groovy
+buildTime()
+```
+Simple unix timestamp (ms)
+
+
+```groovy
+buildTime("yyyy-MM-dd HH:mm:ss")
+```
+Formatted date string
+
+
+```groovy
+buildTime("yyyy-MM-dd HH:mm:ss", "GMT")
+```
+Formatted date string for a given timezone
+
+
+```groovy
+gitSha()
+```
+The current git SHA
+
+
+```groovy
+gitTag()
+```
+The last git tag (lightweight tags included)
+
+
+```groovy
+gitInfo()
+```
+Runs ```git describe --always --dirty```. Returns a result like "v2.1.0-71-gb88c59a-dirty"
+(The last tag + how many commits ahead of that tag are we now in the working tree + current hash + whether the working tree has uncommited changes)
+
+
+```groovy
+shell("scripts/test.sh")
+```
+Runs a shell command and returns its output (doesn't have to be a script)
+
+
+```groovy
+env("SOME_ENV")
+```
+Returns the value of an environment variable
 
 
 ### Contributing
