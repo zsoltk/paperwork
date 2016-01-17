@@ -1,7 +1,6 @@
 package hu.supercluster.paperwork;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,7 +43,6 @@ public class Paperwork {
         }
     }
 
-    @NonNull
     private String getFileContents() {
         StringBuilder builder;
 
