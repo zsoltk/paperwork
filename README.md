@@ -30,7 +30,7 @@ Paperwork can generate this information (and more) for you, and put it into a ``
 Paperwork paperwork = new Paperwork(context);
 String gitSha = paperwork.get("gitSha");
 String buildTime = paperwork.get("buildTime");
-``` 
+```
 
 Not just git hash, not just build time: you define what gets generated, and you can use anything that otherwise would break incremental builds.
 
@@ -51,7 +51,7 @@ buildscript {
     repositories {
         mavenCentral()
     }
-    
+
     dependencies {
         classpath 'hu.supercluster:paperwork-plugin:1.2.1'
     }
@@ -62,23 +62,23 @@ apply plugin: 'hu.supercluster.paperwork'
 paperwork {
     // Configuration comes here, see next section for details
 }
-    
+
 dependencies {
     compile 'hu.supercluster:paperwork:1.2.1'
 }
 ```
 
-Lastly, don't forget to add ```paperwork.json``` to your ```.gitignore``` file. 
+Lastly, don't forget to add ```paperwork.json``` to your ```.gitignore``` file.
 
 ### Configuration
 Paperwork doesn't generate anything by default, you have to define whatever data you need in simple key-value pairings. For a list of helper methods you can use, see next section.
 
 ```groovy
 paperwork {
-    set: [
+    set = [
         someKey1: "someValue",
         someKey2: someHelperMethod()
-    ] 
+    ]
 }
 ```
 
