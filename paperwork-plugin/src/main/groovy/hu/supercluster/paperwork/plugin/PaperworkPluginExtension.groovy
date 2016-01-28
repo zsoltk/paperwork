@@ -22,7 +22,7 @@ class PaperworkPluginExtension {
     }
 
     public String gitInfo() {
-        shell('git describe --always --dirty')
+        shell('git describe --tags --always --dirty')
     }
 
     public String buildTime() {
