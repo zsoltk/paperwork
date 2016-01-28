@@ -53,7 +53,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'hu.supercluster:paperwork-plugin:1.2.1'
+        classpath 'hu.supercluster:paperwork-plugin:1.2.2'
     }
 }
 
@@ -64,7 +64,7 @@ paperwork {
 }
 
 dependencies {
-    compile 'hu.supercluster:paperwork:1.2.1'
+    compile 'hu.supercluster:paperwork:1.2.2'
 }
 ```
 
@@ -142,7 +142,7 @@ The last git tag (lightweight tags included)
 ```groovy
 gitInfo()
 ```
-Runs ```git describe --always --dirty```. Returns a result like "v2.1.0-71-gb88c59a-dirty"
+Runs ```git describe --tags --always --dirty```. Returns a result like "v2.1.0-71-gb88c59a-dirty"
 (The last tag + how many commits ahead of that tag are we now in the working tree + current hash + whether the working tree has uncommited changes)
 
 
