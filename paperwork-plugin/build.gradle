@@ -9,6 +9,8 @@ buildscript {
 }
 
 apply plugin: 'groovy'
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
 
 // gradle.properties holds credentials and is not checked in
 def gradleProperties = new File('gradle.properties')
