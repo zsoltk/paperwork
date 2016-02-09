@@ -53,7 +53,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'hu.supercluster:paperwork-plugin:1.2.2'
+        classpath 'hu.supercluster:paperwork-plugin:1.2.4'
     }
 }
 
@@ -64,7 +64,7 @@ paperwork {
 }
 
 dependencies {
-    compile 'hu.supercluster:paperwork:1.2.2'
+    compile 'hu.supercluster:paperwork:1.2.4'
 }
 ```
 
