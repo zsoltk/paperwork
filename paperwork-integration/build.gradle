@@ -25,6 +25,7 @@ paperwork {
             gitSha:     gitSha(),
             gitTag:     gitTag(),
             gitInfo:    gitInfo(),
+            gitBranch:  gitBranch(),
             shell:      shell("scripts/test.sh"),
             someEnv:    env("USER")
     ]

@@ -25,6 +25,10 @@ class PaperworkPluginExtension {
         shell('git describe --tags --always --dirty')
     }
 
+    public String gitBranch() {
+        shell('git branch | sed -n "/\\* /s///p"')
+    }
+
     public String buildTime() {
         new Date().getTime();
     }

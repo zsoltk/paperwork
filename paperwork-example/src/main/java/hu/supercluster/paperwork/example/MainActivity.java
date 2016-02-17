@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.gitSha) TextView gitSha;
     @Bind(R.id.gitTag) TextView gitTag;
     @Bind(R.id.gitInfo) TextView gitInfo;
+    @Bind(R.id.gitBranch) TextView gitBranch;
     @Bind(R.id.shell) TextView shell;
     @Bind(R.id.env) TextView env;
 
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         gitSha.setText(paperwork.get("gitSha"));
         gitTag.setText(paperwork.get("gitTag"));
         gitInfo.setText(paperwork.get("gitInfo"));
+        gitBranch.setText(paperwork.get("gitBranch"));
         shell.setText(paperwork.get("shell"));
         env.setText(paperwork.get("someEnv"));
     }

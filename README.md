@@ -147,6 +147,11 @@ Runs ```git describe --tags --always --dirty```. Returns a result like "v2.1.0-7
 
 
 ```groovy
+gitBranch()
+```
+The current git branch
+
+```groovy
 shell("scripts/test.sh")
 ```
 Runs a shell command and returns its output (doesn't have to be a script)
