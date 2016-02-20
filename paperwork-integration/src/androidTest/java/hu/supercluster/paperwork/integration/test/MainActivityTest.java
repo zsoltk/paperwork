@@ -53,6 +53,11 @@ public class MainActivityTest {
     }
 
     @Test
+    public void shouldDisplayGitBranch() {
+        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.gitBranch)).check(matches(withText(any(String.class))));
+    }
+
+    @Test
     public void shouldHaveRelevantBuildTime1() {
         onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.buildTime1)).check(matches(withText(new BuildTimeMatcher(TIMESTAMP_THRESHOLD))));
     }
