@@ -26,7 +26,7 @@ class PaperworkPluginExtension {
     }
 
     public String gitBranch() {
-        shell('git branch | sed -n "/\\* /s///p"')
+        ['sh', '-c', 'git branch | sed -n "/\\* /s///p"'].execute().text.trim()
     }
 
     public String buildTime() {
