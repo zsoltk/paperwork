@@ -4,6 +4,7 @@ import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestRule;
@@ -21,6 +22,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.any;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.isEmptyString;
+import static org.hamcrest.core.IsNot.not;
 
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
@@ -44,17 +47,17 @@ public class MainActivityTest {
 
     @Test
     public void shouldDisplayGitTag() {
-        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.gitTag)).check(matches(withText(any(String.class))));
+        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.gitTag)).check(matches(not(withText(isEmptyString()))));
     }
 
     @Test
     public void shouldDisplayGitInfo() {
-        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.gitInfo)).check(matches(withText(any(String.class))));
+        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.gitInfo)).check(matches(not(withText(isEmptyString()))));
     }
 
     @Test
     public void shouldDisplayGitBranch() {
-        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.gitBranch)).check(matches(withText(any(String.class))));
+        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.gitBranch)).check(matches(not(withText(isEmptyString()))));
     }
 
     @Test
@@ -84,6 +87,6 @@ public class MainActivityTest {
 
     @Test
     public void shouldDisplayEnv() {
-        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.env)).check(matches(withText(any(String.class))));
+        onView(ViewMatchers.withId(hu.supercluster.paperwork.integration.R.id.env)).check(matches(not(withText(isEmptyString()))));
     }
 }
