@@ -5,7 +5,7 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:1.5.0'
-        classpath 'hu.supercluster:paperwork-plugin:1.2.4'
+        classpath 'hu.supercluster:paperwork-plugin:1.2.7'
     }
 }
 
@@ -56,7 +56,7 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'hu.supercluster:paperwork:1.2.4'
+    compile 'hu.supercluster:paperwork:1.2.7'
 
     testCompile 'junit:junit:4.12'
 }
